@@ -150,6 +150,52 @@ function addButtonsClickListeners() {
 
 }
 
+function isValid(landowner_idnumber, land_approximate_area, select_ward,
+		title_deed_edition, title_deed_opened, title_deed_parcel_number,
+		title_deed_plot_number, title_deed_map_sheet_number) {
+	var formValid = true;
+	var errorLog = "";
+
+	if (!isKenyanIdNumber(landowner_idnumber)) {
+		formValid = false;
+		errorLog += "Invalid id number\n";
+	}
+
+	if (land_approximate_area < 0 || !isNumbers(land_approximate_area)) {
+		formValid = false;
+		errorLog += "Invalid approximate area\n";
+	}
+	if (select_ward == "-1" || select_ward == null) {
+		formValid = false;
+		errorLog += "Invalid registration section, select a ward\n";
+	}
+	if (!isAlphaNumeric(title_deed_edition)) {
+		formValid = false;
+		errorLog += "Invalid edition\n";
+	}
+	if (title_deed_opened.length == 0) {
+		formValid = false;
+		errorLog += "Invalid date\n";
+	}
+	if (!isAlphaNumeric(title_deed_parcel_number)) {
+		formValid = false;
+		errorLog += "Invalid parcel number\n";
+	}
+
+	if (!isAlphaNumeric(title_deed_plot_number)) {
+		formValid = false;
+		errorLog += "Invalid plot number\n";
+	}
+	if (!isAlphaNumeric(title_deed_map_sheet_number)) {
+		formValid = false;
+		errorLog += "Invalid map sheet number\n";
+	}
+
+	if (!formValid) {
+		alert(errorLog);
+	}
+	return formValid;
+}
 /**
  * Save landOwner
  */
@@ -167,32 +213,38 @@ function saveTitleDeed() {
 	var title_deed_map_sheet_number = $('#input_title_deed_map_sheet_number')
 			.val();
 
-	var saveType = localStorage.getItem(TITLE_DEEDS_SAVE_TYPE);
+	if (isValid(landowner_idnumber, land_approximate_area, select_ward,
+			title_deed_edition, title_deed_opened, title_deed_parcel_number,
+			title_deed_plot_number, title_deed_map_sheet_number)) {
+		var saveType = localStorage.getItem(TITLE_DEEDS_SAVE_TYPE);
 
-	var params = "landowner_idnumber=" + landowner_idnumber
+		var params = "landowner_idnumber=" + landowner_idnumber
 
-	+ "&land_approximate_area=" + land_approximate_area + "&select_ward="
-			+ select_ward + "&title_deed_edition=" + title_deed_edition
-			+ "&title_deed_opened=" + title_deed_opened
-			+ "&title_deed_parcel_number=" + title_deed_parcel_number
-			+ "&title_deed_plot_number=" + title_deed_plot_number
-			+ "&title_deed_map_sheet_number=" + title_deed_map_sheet_number;
+		+ "&land_approximate_area=" + land_approximate_area + "&select_ward="
+				+ select_ward + "&title_deed_edition=" + title_deed_edition
+				+ "&title_deed_opened=" + title_deed_opened
+				+ "&title_deed_parcel_number=" + title_deed_parcel_number
+				+ "&title_deed_plot_number=" + title_deed_plot_number
+				+ "&title_deed_map_sheet_number=" + title_deed_map_sheet_number;
 
-	switch (saveType) {
-	case SAVE_TYPE_UPDATE:
-		params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
-				+ EXTRA_TITLE_DEED + "=" + getSelectedTitleDeed();
-		sendPOSTHttpRequest(TITLE_DEEDS_URL, params,
-				INTENT_UPDATE_TITLE_DEEDS_NAMES);
-		break;
-	case SAVE_TYPE_INSERT:
-		params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
-		sendPOSTHttpRequest(TITLE_DEEDS_URL, params, INTENT_INSERT_TITLE_DEEDS);
-		break;
+		switch (saveType) {
+		case SAVE_TYPE_UPDATE:
+			params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
+					+ EXTRA_TITLE_DEED + "=" + getSelectedTitleDeed();
+			sendPOSTHttpRequest(TITLE_DEEDS_URL, params,
+					INTENT_UPDATE_TITLE_DEEDS_NAMES);
+			break;
+		case SAVE_TYPE_INSERT:
+			params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
+			sendPOSTHttpRequest(TITLE_DEEDS_URL, params,
+					INTENT_INSERT_TITLE_DEEDS);
+			break;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
+
 }
 
 /**
