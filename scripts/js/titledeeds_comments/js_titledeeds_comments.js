@@ -28,11 +28,12 @@ INTENT_QUERY_LAND_OWNER_TITLE_DEEDS = "query_land_owner_title_deeds";
 addEventListener("load", init, false);
 
 function init() {
-	
+
 	checkForAuthenctication();
-	
-	sendPOSTHttpRequest(WORKER_SCRIPT_URL, ACTION_TYPE + "=" + ACTION_TYPE, INTENT_INJECT_PAGE_NAVIGATION);
-	
+
+	sendPOSTHttpRequest(WORKER_SCRIPT_URL, ACTION_TYPE + "=" + ACTION_TYPE,
+			INTENT_INJECT_PAGE_NAVIGATION);
+
 	// Reset last known land owner id
 	setCache(LAND_OWNER_ID, "-1");
 
@@ -163,7 +164,7 @@ function saveTitleDeedcomments() {
 		alertError("Cannot save title deed comment..Select title deed");
 		return;
 	}
-	if (titledeedComment.length < 5) {
+	if (titledeedComment.length < 5 || isNumbers(titledeedComment)) {
 		alertError("Cannot save title deed comment..Enter title deed comment");
 		return;
 	}
