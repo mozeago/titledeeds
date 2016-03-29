@@ -170,6 +170,32 @@ function setCounties(response) {
 	document.getElementById('select_filter_deleted_wards_by_county').innerHTML = noCountyFilters
 			+ response;
 }
+
+function isFormValid(county, wardName, wardHqs) {
+
+	var formValid = true;
+	
+	if (county == "-1") {
+		formValid = false;
+		document.getElementById('label_county').style.color = "#FF0000";
+	} else {
+		document.getElementById('label_county').style.color = "#000000";
+	}
+	if (wardName.length < 3 || !isLetters(wardName)) {
+		formValid = false;
+		document.getElementById('label_ward').style.color = "#FF0000";
+	} else {
+		document.getElementById('label_ward').style.color = "#000000";
+	}
+	if (wardHqs.length < 3 || !isLetters(wardHqs)) {
+		document.getElementById('label_ward_hqs').style.color = "#FF0000";
+		formValid = false;
+	} else {
+		document.getElementById('label_ward_hqs').style.color = "#000000";
+	}
+
+	return formValid;
+}
 /**
  * Save ward
  */
@@ -184,20 +210,23 @@ function saveWard() {
 	var params = "ward_name=" + wardName + "&ward_headquarters=" + wardHqs
 			+ "&county=" + county;
 
-	switch (saveType) {
-	case SAVE_TYPE_UPDATE:
-		params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&" + EXTRA_WARD
-				+ "=" + getSelectedWard();
-		sendPOSTHttpRequest(WARDS_URL, params, INTENT_UPDATE_WARD_NAMES);
-		break;
-	case SAVE_TYPE_INSERT:
-		params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
-		sendPOSTHttpRequest(WARDS_URL, params, INTENT_INSERT_WARD);
-		break;
+	if (isFormValid(county, wardName, wardHqs)) {
+		switch (saveType) {
+		case SAVE_TYPE_UPDATE:
+			params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
+					+ EXTRA_WARD + "=" + getSelectedWard();
+			sendPOSTHttpRequest(WARDS_URL, params, INTENT_UPDATE_WARD_NAMES);
+			break;
+		case SAVE_TYPE_INSERT:
+			params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
+			sendPOSTHttpRequest(WARDS_URL, params, INTENT_INSERT_WARD);
+			break;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
+
 }
 
 /**
