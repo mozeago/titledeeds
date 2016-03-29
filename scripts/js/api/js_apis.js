@@ -240,3 +240,75 @@ function checkForAuthenctication() {
 		setInterval(requestAuthentication, 300000);
 	}
 }
+
+/**
+ * Checks where the input meets the specified pattern
+ * 
+ * @param pattern
+ * @param input
+ * @returns true if input matches pattern
+ */
+
+function validate(pattern, input) {
+	return input.match(pattern);
+}
+
+/**
+ * Checks whether the input contains only letters
+ * 
+ * @param input
+ * @returns
+ */
+function isLetters(input) {
+	return validate(/^[A-Za-z]+$/, input);
+}
+
+/**
+ * Checks whether the input contains only numbers
+ * 
+ * @param input
+ * @returns
+ */
+function isNumbers(input) {
+	return validate(/^[0-9]+$/, input);
+}
+
+/**
+ * Checks whether the input is a valid email address
+ * 
+ * @param input
+ * @returns
+ */
+function isEmail(input) {
+	return validate(/^[w-.+]+@[a-zA-Z0-9.-]+.[a-zA-z0-9]{2,4}$/, input);
+}
+
+/**
+ * Checks whether the input contains only letters and numbers
+ * 
+ * @param input
+ * @returns
+ */
+function isAlphaNumeric(input) {
+	return validate(/^[0-9a-zA-Z]+$/, input);
+}
+
+/**
+ * Checks whether the input is a valid kenyan id number
+ * 
+ * @param input
+ * @returns
+ */
+function isKenyanIdNumber(input) {
+	return validate(/^[0-9]{7,8}$/, input);
+}
+
+/**
+ * Checks whether the input is a valid kenyan passport number
+ * 
+ * @param input
+ * @returns
+ */
+function isKenyanPassport(input) {
+	return validate(/^[0-9]{10}$/, input);
+}
