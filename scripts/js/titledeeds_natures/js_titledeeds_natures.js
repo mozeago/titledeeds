@@ -28,11 +28,12 @@ INTENT_QUERY_LAND_OWNER_TITLE_DEEDS = "query_land_owner_title_deeds";
 addEventListener("load", init, false);
 
 function init() {
-	
+
 	checkForAuthenctication();
-	
-	sendPOSTHttpRequest(WORKER_SCRIPT_URL, ACTION_TYPE + "=" + ACTION_TYPE, INTENT_INJECT_PAGE_NAVIGATION);
-	
+
+	sendPOSTHttpRequest(WORKER_SCRIPT_URL, ACTION_TYPE + "=" + ACTION_TYPE,
+			INTENT_INJECT_PAGE_NAVIGATION);
+
 	// Reset last known land owner id
 	setCache(LAND_OWNER_ID, "-1");
 
@@ -86,7 +87,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		document.getElementById('id_table_body_titledeeds_nature').innerHTML = response;
 		break;
 	case INTENT_DELETE_TITLE_DEED_NATURE:
-		 populateTitleDeedNatures();
+		populateTitleDeedNatures();
 		break;
 	case INTENT_STAGE_SELECTED_TITLE_DEEDS_FOR_EDITING:
 		stageSelectedTitleDeedForEditing(response);
@@ -162,7 +163,7 @@ function saveTitleDeedNatures() {
 		alertError("Cannot save title deed nature..Select title deed");
 		return;
 	}
-	if (titledeedEasement.length < 5) {
+	if (titledeedEasement.length < 5 || isNumbers(titledeedEasement)) {
 		alertError("Cannot save title deed nature..Enter title deed nature");
 		return;
 	}
