@@ -121,24 +121,24 @@ function isValidForm(firstname, lastname, middlename, idnumber, passport,
 		dateOfBirth, address) {
 	var formValid = true;
 	var errorLog = "";
-	if (firstname.length == 0 || !firstname.isNaN) {
+	if (firstname.length < 3 || !isLetters(firstname)) {
 		formValid = false;
 		errorLog += "Invalid firstname\n";
 	}
 
-	if (lastname.length == 0 || !lastname.isNaN) {
+	if (lastname.length < 3 || !isLetters(lastname)) {
 		formValid = false;
 		errorLog += "Invalid lastname\n";
 	}
-	if (middlename.length == 0 || !middlename.isNaN) {
+	if (middlename.length < 3 || !isLetters(middlename)) {
 		formValid = false;
 		errorLog += "Invalid middlename\n";
 	}
-	if (idnumber.length == 0 || idnumber.isNaN) {
+	if (!isKenyanIdNumber (idnumber)) {
 		formValid = false;
 		errorLog += "Invalid id number\n";
 	}
-	if (passport.length == 0 || !passport.isNaN) {
+	if (!isKenyanPassport(passport)) {
 		formValid = false;
 		errorLog += "Invalid passport\n";
 	}
@@ -146,7 +146,7 @@ function isValidForm(firstname, lastname, middlename, idnumber, passport,
 		formValid = false;
 		errorLog += "Invalid date of birth\n";
 	}
-	if (address.length == 0 || address.isNaN) {
+	if (!isAlphaNumeric(address)) {
 		formValid = false;
 		errorLog += "Invalid address\n";
 	}
