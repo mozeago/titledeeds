@@ -125,6 +125,22 @@ function addButtonsClickListeners() {
 
 }
 
+function isValid(countyName, countyHqs) {
+	var isValid = true;
+	if (!countyName.isNaN || countyName.length == 0) {
+		isValid = false;
+		document.getElementById('label_county').style.color = "#FF0000";
+	} else {
+		document.getElementById('label_county').style.color = "#000000";
+	}
+	if (!countyHqs.isNaN || countyHqs.length == 0) {
+		isValid = false;
+		document.getElementById('label_county_headquaters').style.color = "#FF0000";
+	} else {
+		document.getElementById('label_county_headquaters').style.color = "#000000";
+	}
+	return isValid;
+}
 /**
  * Save county
  */
@@ -133,25 +149,29 @@ function saveCounty() {
 	var countyName = $('#input_county_name').val();
 	var countyHqs = $('#input_county_headquarters').val();
 
-	var saveType = localStorage.getItem(COUNTY_SAVE_TYPE);
+	if (isValid(countyName, countyHqs)) {
+		var saveType = localStorage.getItem(COUNTY_SAVE_TYPE);
 
-	var params = "county_name=" + countyName + "&county_headquarters="
-			+ countyHqs;
+		var params = "county_name=" + countyName + "&county_headquarters="
+				+ countyHqs;
 
-	switch (saveType) {
-	case SAVE_TYPE_UPDATE:
-		params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&" + EXTRA_COUNTY
-				+ "=" + getSelectedCounty();
-		sendPOSTHttpRequest(COUNTIES_URL, params, INTENT_UPDATE_COUNTY_NAMES);
-		break;
-	case SAVE_TYPE_INSERT:
-		params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
-		sendPOSTHttpRequest(COUNTIES_URL, params, INTENT_INSERT_COUNTY);
-		break;
+		switch (saveType) {
+		case SAVE_TYPE_UPDATE:
+			params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
+					+ EXTRA_COUNTY + "=" + getSelectedCounty();
+			sendPOSTHttpRequest(COUNTIES_URL, params,
+					INTENT_UPDATE_COUNTY_NAMES);
+			break;
+		case SAVE_TYPE_INSERT:
+			params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
+			sendPOSTHttpRequest(COUNTIES_URL, params, INTENT_INSERT_COUNTY);
+			break;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
+
 }
 
 /**
