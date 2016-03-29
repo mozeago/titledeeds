@@ -117,6 +117,44 @@ function addButtonsClickListeners() {
 
 }
 
+function isValidForm(firstname, lastname, middlename, idnumber, passport,
+		dateOfBirth, address) {
+	var formValid = true;
+	var errorLog = "";
+	if (firstname.length == 0 || !firstname.isNaN) {
+		formValid = false;
+		errorLog += "Invalid firstname\n";
+	}
+
+	if (lastname.length == 0 || !lastname.isNaN) {
+		formValid = false;
+		errorLog += "Invalid lastname\n";
+	}
+	if (middlename.length == 0 || !middlename.isNaN) {
+		formValid = false;
+		errorLog += "Invalid middlename\n";
+	}
+	if (idnumber.length == 0 || idnumber.isNaN) {
+		formValid = false;
+		errorLog += "Invalid id number\n";
+	}
+	if (passport.length == 0 || !passport.isNaN) {
+		formValid = false;
+		errorLog += "Invalid passport\n";
+	}
+	if (dateOfBirth.length == 0) {
+		formValid = false;
+		errorLog += "Invalid date of birth\n";
+	}
+	if (address.length == 0 || address.isNaN) {
+		formValid = false;
+		errorLog += "Invalid address\n";
+	}
+	if (!formValid) {
+		alert(errorLog);
+	}
+	return formValid;
+}
 /**
  * Save landOwner
  */
@@ -140,21 +178,26 @@ function saveLandOwner() {
 			+ "&passport=" + passport + "&dateOfBirth=" + dateOfBirth
 			+ "&address=" + address;
 
-	switch (saveType) {
-	case SAVE_TYPE_UPDATE:
-		params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
-				+ EXTRA_LAND_OWNER + "=" + getSelectedLandOwner();
-		sendPOSTHttpRequest(LAND_OWNERS_URL, params,
-				INTENT_UPDATE_LAND_OWNERS_NAMES);
-		break;
-	case SAVE_TYPE_INSERT:
-		params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
-		sendPOSTHttpRequest(LAND_OWNERS_URL, params, INTENT_INSERT_LAND_OWNERS);
-		break;
+	if (isValidForm(firstname, lastname, middlename, idnumber, passport,
+			dateOfBirth, address)) {
+		switch (saveType) {
+		case SAVE_TYPE_UPDATE:
+			params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
+					+ EXTRA_LAND_OWNER + "=" + getSelectedLandOwner();
+			sendPOSTHttpRequest(LAND_OWNERS_URL, params,
+					INTENT_UPDATE_LAND_OWNERS_NAMES);
+			break;
+		case SAVE_TYPE_INSERT:
+			params += "&" + ACTION_TYPE + "=" + ACTION_INSERT;
+			sendPOSTHttpRequest(LAND_OWNERS_URL, params,
+					INTENT_INSERT_LAND_OWNERS);
+			break;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
+
 }
 
 /**
