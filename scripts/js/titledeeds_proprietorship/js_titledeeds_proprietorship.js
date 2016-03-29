@@ -31,12 +31,12 @@ INTENT_QUERY_REGISTERED_PROPRIETOR_NAME = "get_registered_proprietor";
 addEventListener("load", init, false);
 
 function init() {
-	
+
 	checkForAuthenctication();
-	
-	sendPOSTHttpRequest(WORKER_SCRIPT_URL, ACTION_TYPE + "=" + ACTION_TYPE, INTENT_INJECT_PAGE_NAVIGATION);
-	
-	
+
+	sendPOSTHttpRequest(WORKER_SCRIPT_URL, ACTION_TYPE + "=" + ACTION_TYPE,
+			INTENT_INJECT_PAGE_NAVIGATION);
+
 	// Reset last known land owner id
 	setCache(LAND_OWNER_ID, "-1");
 
@@ -201,10 +201,16 @@ function saveTitleDeedProprietorships() {
 		default:
 			break;
 		}
+
 	}
 
 }
 
+/**
+ * Validates form data
+ * 
+ * @returns {Boolean}
+ */
 function isValidTitleDeedProprietorsip() {
 
 	var isValidTitleDeedProprietorship = true;
