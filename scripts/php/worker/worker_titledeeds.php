@@ -132,7 +132,8 @@ function queryTitleDeeds($action, $client) {
 				if ($title_deed_info ["trashed"] == 1 || $title_deed_info ["deleted"] == 1) {
 					continue;
 				}
-				$title_deedHTML .= '<option value="' . $title_deed_info ['id_land_owner'] . '" >' . $title_deed_info ['land_owner_name'] . '</option>';
+				$title_deedHTML .= '<option value="' . $title_deed_info ['id_land_owner'] . '" >' 
+						. $title_deed_info ['land_owner_name'] . '</option>';
 				$count ++;
 			}
 		}
@@ -307,7 +308,7 @@ function prepareLandOwnerTitleDeeds($action, $client) {
 		
 		$county_name = (new County ( $action, $client ))->get_county_name ( $id_county );
 		
-		$title_deeds_html .= '<option value="' . $id_titledeed . '">' . $ward_name . '/' . $county_name . ' Plot no. ' . $plot_number . '</option>';
+		$title_deeds_html .= '<option value="' . $id_titledeed . '">' . $ward_name . '/' . $county_name . ' Plot no. ' . $plot_number .' Parcel no. ' . $parcel_number .' Map Sheet no. ' . $registy_map_sheet_number . '</option>';
 	}
 	
 	echo $title_deeds_html;
