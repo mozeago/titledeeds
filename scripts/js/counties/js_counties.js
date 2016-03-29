@@ -127,17 +127,17 @@ function addButtonsClickListeners() {
 
 function isValid(countyName, countyHqs) {
 	var isValid = true;
-	if (!countyName.isNaN || countyName.length == 0) {
+	if (!isLetters(countyName) || countyName.length == 0) {
 		isValid = false;
 		document.getElementById('label_county').style.color = "#FF0000";
 	} else {
-		document.getElementById('label_county').style.color = "#000000";
+		document.getElementById('label_county').style.color = "#FFFFFF";
 	}
-	if (!countyHqs.isNaN || countyHqs.length == 0) {
+	if (!isLetters(countyHqs) || countyHqs.length == 0) {
 		isValid = false;
 		document.getElementById('label_county_headquaters').style.color = "#FF0000";
 	} else {
-		document.getElementById('label_county_headquaters').style.color = "#000000";
+		document.getElementById('label_county_headquaters').style.color = "#FFFFFF";
 	}
 	return isValid;
 }
