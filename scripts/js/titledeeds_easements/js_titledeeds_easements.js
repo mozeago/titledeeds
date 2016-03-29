@@ -51,7 +51,6 @@ function init() {
 
 	// add test data
 	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD---addTestData();
-	
 
 	// register long polling engine
 	registerLongPollingEngine();
@@ -163,7 +162,7 @@ function saveTitleDeedEasements() {
 		alertError("Cannot save title deed easement..Select title deed");
 		return;
 	}
-	if (titledeedEasement.length < 5) {
+	if (titledeedEasement.length < 5 || isNumbers(titledeedEasement)) {
 		alertError("Cannot save title deed easement..Enter title deed easement");
 		return;
 	}
