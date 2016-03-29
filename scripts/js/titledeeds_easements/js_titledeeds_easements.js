@@ -50,8 +50,8 @@ function init() {
 	addDropDownSelectListeners();
 
 	// add test data
-	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD---
-	addTestData();
+	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD---addTestData();
+	
 
 	// register long polling engine
 	registerLongPollingEngine();
