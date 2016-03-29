@@ -62,10 +62,10 @@
 	}
 
 
-	public function query(){
+	public function query($distinct,$extraSQL=""){
 
 		$columns = $records = array ();
-		$queried_birth_citizens = $this->birth_citizens->fetch_assoc_in_birth_citizens ( $columns, $records );
+		$queried_birth_citizens = $this->birth_citizens->fetch_assoc_in_birth_citizens ($distinct, $columns, $records,$extraSQL );
 
 		if($this->build = ENG_BUILD){
 			return $this->query_eng_build($queried_birth_citizens);

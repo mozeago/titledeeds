@@ -62,10 +62,10 @@
 	}
 
 
-	public function query(){
+	public function query($distinct,$extraSQL=""){
 
 		$columns = $records = array ();
-		$queried_district = $this->district->fetch_assoc_in_district ( $columns, $records );
+		$queried_district = $this->district->fetch_assoc_in_district ($distinct, $columns, $records,$extraSQL );
 
 		if($this->build = ENG_BUILD){
 			return $this->query_eng_build($queried_district);

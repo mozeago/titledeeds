@@ -1,7 +1,7 @@
 <?php
 
 	/**
-	* THIS SOURCE CODE WAS AUTOMATICALLY GENERATED ON Thu 06:50:28  18/02/2016
+	* THIS SOURCE CODE WAS AUTOMATICALLY GENERATED ON Wed 08:30:07  23/03/2016
 	* 
 	*
 	* DATABASE CRUD GENERATOR IS AN OPEN SOURCE PROJECT. TO IMPROVE ON THIS PROJECT BY
@@ -367,8 +367,8 @@ class County {
 	*  
 	* @return associative array of the records that are found after performing the query
 	*/
-	public function fetch_assoc_in_county(Array $columns, Array $records, $printSQL = false) {
-		return $this->fetch_assoc ( $this->get_table (), $columns, $records, $printSQL );
+	public function fetch_assoc_in_county($distinct, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
+		return $this->fetch_assoc ( $distinct, $this->get_table (),$columns, $records, $extraSQL , $printSQL );
 	}
 	
 	/**
@@ -376,8 +376,17 @@ class County {
 	*  
 	* @return associative array of the records that are found after performing the query
 	*/
-	public function query_from_county(Array $columns, Array $records, $printSQL = false) {
-		return $this->query ( $this->get_table (), $columns, $records, $printSQL );
+	public function query_from_county(Array $columns, Array $records,$extraSQL="",  $printSQL = false) {
+		return $this->query ( $this->get_table (), $columns, $records,$extraSQL,$printSQL );
+	}
+	
+	/**
+	* Gets an Associative array of the records in the table [county] that meets the passed distinct criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
+	public function query_distinct_from_county(Array $columns, Array $records,$extraSQL="",  $printSQL = false) {
+		return $this->query_distinct ( $this->get_table (), $columns, $records,$extraSQL,$printSQL );
 	}
 	
 	/**
@@ -385,8 +394,8 @@ class County {
 	*  
 	* @return associative array of the records that are found after performing the query
 	*/
-	public function search_in_county(Array $columns, Array $records, $printSQL = false) {
-		return $this->search ( $this->get_table (), $columns, $records, $printSQL );
+	public function search_in_county(Array $columns, Array $records,$extraSQL="", $printSQL = false) {
+		return $this->search ( $this->get_table (), $columns, $records,$extraSQL, $printSQL );
 	}
 	
 	/**
@@ -441,8 +450,8 @@ class County {
 	*  
 	* @return associative array of the records that are found after performing the query
 	*/
-	private function fetch_assoc($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_database_utils ()->fetch_assoc ( $table, $columns, $records, $printSQL );
+	private function fetch_assoc($distinct, $table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
+		return $this->get_database_utils ()->fetch_assoc ( $distinct, $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
 	/**
@@ -450,8 +459,16 @@ class County {
 	*  
 	* @return associative array of the records that are found after performing the query
 	*/
-	public function query($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_database_utils ()->query ( $table, $columns, $records, $printSQL );
+	public function query($table, Array $columns, Array $records,$extraSQL="",$printSQL = false) {
+		return $this->get_database_utils ()->query ( $table, $columns, $records,$extraSQL, $printSQL );
+	}
+	/**
+	* Gets an Associative array of the records in the table [county] that meets the distinct passed criteria
+	*  
+	* @return associative array of the records that are found after performing the query
+	*/
+	public function query_distinct($table, Array $columns, Array $records,$extraSQL="",$printSQL = false) {
+		return $this->get_database_utils ()->query_distinct ( $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
 	/**
@@ -459,8 +476,8 @@ class County {
 	*  
 	* @return associative array of the records that are found after performing the query
 	*/
-	private function search($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->get_database_utils ()->search ( $table, $columns, $records, $printSQL );
+	private function search($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
+		return $this->get_database_utils ()->search ( $table, $columns, $records, $extraSQL, $printSQL );
 	}
 }
 ?>

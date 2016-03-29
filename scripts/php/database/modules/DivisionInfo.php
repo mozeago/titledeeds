@@ -62,10 +62,10 @@
 	}
 
 
-	public function query(){
+	public function query($distinct,$extraSQL=""){
 
 		$columns = $records = array ();
-		$queried_division = $this->division->fetch_assoc_in_division ( $columns, $records );
+		$queried_division = $this->division->fetch_assoc_in_division ($distinct, $columns, $records,$extraSQL );
 
 		if($this->build = ENG_BUILD){
 			return $this->query_eng_build($queried_division);

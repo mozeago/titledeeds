@@ -62,10 +62,10 @@
 	}
 
 
-	public function query(){
+	public function query($distinct,$extraSQL=""){
 
 		$columns = $records = array ();
-		$queried_county = $this->county->fetch_assoc_in_county ( $columns, $records );
+		$queried_county = $this->county->fetch_assoc_in_county ($distinct, $columns, $records,$extraSQL );
 
 		if($this->build = ENG_BUILD){
 			return $this->query_eng_build($queried_county);

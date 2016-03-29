@@ -62,10 +62,10 @@
 	}
 
 
-	public function query(){
+	public function query($distinct,$extraSQL=""){
 
 		$columns = $records = array ();
-		$queried_sublocation = $this->sublocation->fetch_assoc_in_sublocation ( $columns, $records );
+		$queried_sublocation = $this->sublocation->fetch_assoc_in_sublocation ($distinct, $columns, $records,$extraSQL );
 
 		if($this->build = ENG_BUILD){
 			return $this->query_eng_build($queried_sublocation);

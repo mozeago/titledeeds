@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>UI BUIDER</title>
+</head>
+<body>
+	<div style="width:50%;float:left;">
+		<textarea id="id_textarea_ui_builder" style="width:50%;height:100%;" oninput="draw();"></textarea>
+	</div>
+	
+	<div id="div_html_renderer" style="width:50%;float:left;">
+	
+	</div>
+</body>
+<script type="text/javascript">
+function draw(){
+
+	document.getElementById('div_html_renderer').innerHTML=document.getElementById('id_textarea_ui_builder').value;
+}
+</script>
+</html>

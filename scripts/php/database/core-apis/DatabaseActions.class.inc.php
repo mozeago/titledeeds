@@ -32,6 +32,13 @@ define ( "ACTION_UPDATE", "update" );
 define ( "POST_CLIENT", "client" );
 
 /**
+* Defines a constant client intent used to get the intent of the  client posting data
+*
+*/
+define ( "CLIENT_INTENT", "intent" );
+
+
+/**
 * Defines a constant post action used to get the action of the client posting data
 *
 */

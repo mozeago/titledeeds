@@ -7,4 +7,4 @@ CREATE TABLE `county` (
   `first_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_county`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1

@@ -8,4 +8,4 @@ CREATE TABLE `district` (
   `first_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_district`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1

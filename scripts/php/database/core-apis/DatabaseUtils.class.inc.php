@@ -365,14 +365,19 @@ class DatabaseUtils {
 	 * Returns an associative array of the query
 	 * 
 	 * @param
+	 *        	boolean distinct
+	 * @param
 	 *        	string Table name
 	 * @param
 	 *        	array columns
 	 * @param
 	 *        	array records
+	 * @param 
+	 *			string extraSQL
+	 *
 	 * @return associative array
 	 */
-	public function fetch_assoc($table, Array $columns, Array $records, $printSQL = false) {
+	public function fetch_assoc($distinct, $table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
 				throw new NullabilityException ( "The table name cannot be null" );
@@ -382,9 +387,19 @@ class DatabaseUtils {
 		$query = "";
 		
 		if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
-			$query = "SELECT * FROM `" . $table . "`";
+			if($distinct){
+				$query = "SELECT DISTINCT * FROM `" . $table . "`";
+			}else{
+				$query = "SELECT * FROM `" . $table . "`";
+			}
+			
 		} else {
-			$query = "SELECT * FROM `" . $table . "` WHERE ";
+			if($distinct){
+				$query = "SELECT DISTINCT * FROM `" . $table . "` WHERE ";
+			}else{
+				$query = "SELECT * FROM `" . $table . "` WHERE ";
+			}
+			
 		}
 		
 		if (count ( $columns ) == count ( $records )) {
@@ -396,12 +411,23 @@ class DatabaseUtils {
 				}
 			}
 			
+			if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
+				
+				if ($extraSQL != "") {
+					$query .= " WHERE " . $extraSQL . ";";
+				}
+			} else {
+				if ($extraSQL != "") {
+					$query .= $extraSQL . ";";
+				}
+			}
 			
 			if ($printSQL) {
 				echo $query;
 			}
 			
 			$results = array ();
+			
 			$exec = $this->database_handle->query ( $query ); // Perform Query
 			while ( $assoc = $exec->fetch_assoc () ) {
 				$results [count ( $results )] = $assoc; // Return rows
@@ -430,10 +456,31 @@ class DatabaseUtils {
 	 *        	array columns
 	 * @param
 	 *        	array records
+	 * @param 
+	 *			string extraSQL
+	 *
 	 * @return associative array
 	 */
-	public function query($table, Array $columns, Array $records, $printSQL = false) {
-		return $this->fetch_assoc ( $table, $columns, $records, $printSQL );
+	public function query($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
+		return $this->fetch_assoc (false, $table, $columns, $records,$extraSQL, $printSQL );
+	}
+	
+	/**
+	 * Returns an associative array of the distinct query
+	 * 
+	 * @param
+	 *        	string Table name
+	 * @param
+	 *        	array columns
+	 * @param
+	 *        	array records
+	 * @param 
+	 *			string extraSQL
+	 *
+	 * @return associative array
+	 */
+	public function query_distinct($table, Array $columns, Array $records,$extraSQL="", $printSQL = false) {
+		return $this->fetch_assoc (true, $table, $columns, $records,$extraSQL, $printSQL );
 	}
 	
 	/**
@@ -447,7 +494,7 @@ class DatabaseUtils {
 	 *        	array records
 	 * @return associative array
 	 */
-	public function search($table, Array $columns, Array $records, $printSQL = false) {
+	public function search($table, Array $columns, Array $records, $extraSQL="", $printSQL = false) {
 		if (empty ( $table ) || count ( $columns ) == 0 || count ( $records ) == 0) {
 			if (empty ( $table )) {
 				throw new NullabilityException ( "The table name cannot be null" );
@@ -471,7 +518,17 @@ class DatabaseUtils {
 				}
 			}
 			
-			
+			if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
+				
+				if ($extraSQL != "") {
+					$query .= " WHERE " . $extraSQL . ";";
+				}
+			} else {
+				if ($extraSQL != "") {
+					$query .= $extraSQL . ";";
+				}
+			}
+				
 			if ($printSQL) {
 				echo $query;
 			}

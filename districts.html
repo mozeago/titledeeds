@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Districts</title>
+</head>
+<body>
+	<div id="id_notification_pane"></div>
+	<div>
+		<div style="float: left;">
+			<div>
+				<label> County </label>
+				<div>
+					<select id="select_counties"></select>
+				</div>
+			</div>
+			<div>
+				<label> District </label>
+				<div>
+					<input placeholder="District name" id="input_district_name" />
+				</div>
+			</div>
+
+			<div>
+				<label> District Head quarters</label>
+				<div>
+					<input placeholder="District headquarters"
+						id="input_district_headquarters" />
+				</div>
+				<div>
+					<button id="button_save_district">Save</button>
+				</div>
+			</div>
+		</div>
+		<div style="float: right;">
+			<div>
+				<div>
+					<label>Districts </label> <input id="id_input_search_district"
+						placeholder="Search district" /> <select
+						id="select_filter_districts_by_county"
+					>
+					</select>
+				</div>
+				<hr />
+
+				<div>
+					<table id="id_table_districts">
+						<thead id="id_table_head_districts">
+							<tr>
+								<td>#</td>
+								<td>district name</td>
+								<td>district headquarters</td>
+								<td colspan="2">Actions</td>
+							</tr>
+						</thead>
+						<tbody id="id_table_body_districts">
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div style="margin-top: 50px;">
+				<div>
+					<label>Deleted Districts </label> <input 
+						id="id_input_search_deleted_district"
+						placeholder="Search district" /> <select
+						id="select_filter_deleted_districts_by_county"
+						>
+					</select>
+				</div>
+				<hr />
+
+				<div>
+					<table id="id_table_deleted_districts">
+						<thead id="id_table_head_deleted_districts">
+							<tr>
+								<td>#</td>
+								<td>district name</td>
+								<td>district headquarters</td>
+								<td colspan="2">Actions</td>
+							</tr>
+						</thead>
+						<tbody id="id_table_body_deleted_districts">
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="scripts/js/jquery/jquery-1.11.1.min.js"
+		type="text/javascript"></script>
+	<script src="scripts/js/params/globalparams.js" type="text/javascript"></script>
+	<script src="scripts/js/xhr_scripts_urls/js_xhr_scripts_urls.js"
+		type="text/javascript"></script>
+	<script src="scripts/js/api/js_apis.js" type="text/javascript"></script>
+	<script src="scripts/js/districts/js_districts.js"
+		type="text/javascript"></script>
+
+</body>
+
+</html>
