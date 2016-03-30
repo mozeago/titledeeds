@@ -80,6 +80,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		document.getElementById('input_ward_headquarters').value = "";
 		setDefaultSaveType();
 		populateWards();
+		window.location="landowners.html";
 		break;
 	case INTENT_QUERY_COUNTIES:
 		setCounties(response);
