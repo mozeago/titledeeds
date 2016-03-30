@@ -127,6 +127,15 @@ function getCache(key) {
 }
 
 /**
+ * Remove an item from the local storage
+ * 
+ * @param key
+ * @returns
+ */
+function removeCache(key) {
+	return localStorage.removeItem(key);
+}
+/**
  * Hides an HTML Element
  * 
  * @param id
