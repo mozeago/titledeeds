@@ -58,6 +58,14 @@ function init() {
 	// register long polling engine
 	registerLongPollingEngine();
 
+	if (getCache(EXTRA_LAND_OWNER_ID) == null) {
+		var landowner_id = prompt("Enter land owner id number");
+		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
+	}
+
+	document.getElementById('id_input_registered_proprietor').value = getCache(EXTRA_LAND_OWNER_ID);
+	fetchLandOwnerName();
+	//populateTitleDeeds();
 }
 
 /**
@@ -80,10 +88,10 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		break;
 	case INTENT_INSERT_TITLE_DEED_PROPRIETORSHIP:
 	case INTENT_UPDATE_TITLE_DEED_PROPRIETORSHIP:
-		$('#id_notification_pane').text(response);
 		resetInputFields();
 		setDefaultSaveType();
 		populateTitleDeedProprietorships();
+		window.location = "titledeeds_comments.html";
 		break;
 
 	case INTENT_QUERY_TITLE_DEEDS_PROPRIETORSHIP:
@@ -226,28 +234,27 @@ function isValidTitleDeedProprietorsip() {
 
 	if (extraTitleDeed == "-1" || extraTitleDeed == null) {
 		errorCount++;
-		errorLog += "<p>" + errorCount + " Select title deed</p>";
+		errorLog += "" + errorCount + " Select title deed\n";
 		isValidTitleDeedProprietorship = false;
 	}
 	if (registeredProprietor == "-1" || registeredProprietor.length < 7) {
 		errorCount++;
-		errorLog += "<p>"
-				+ errorCount
-				+ " Invalid proprietor, the proprietor may not be registered</p>";
+		errorLog += "" + errorCount
+				+ " Invalid proprietor, the proprietor may not be registered\n";
 		isValidTitleDeedProprietorship = false;
 	}
 	if (entryNumber.length < 1) {
 		errorCount++;
-		errorLog += "<p>" + errorCount + " Invalid entry number</p>";
+		errorLog += "" + errorCount + " Invalid entry number\n";
 		isValidTitleDeedProprietorship = false;
 	}
 	if (considerationAndRemarks.length < 1) {
 		errorCount++;
-		errorLog += "<p>" + errorCount + " Enter consideration and remarks</p>";
+		errorLog += "" + errorCount + " Enter consideration and remarks\n";
 		isValidTitleDeedProprietorship = false;
 	}
 
-	alertError(errorLog);
+	alert(errorLog);
 
 	return isValidTitleDeedProprietorship;
 }
@@ -273,8 +280,7 @@ function setSelectedTitleDeedProprietorship(extraTitleDeed) {
  */
 function populateTitleDeedProprietorships() {
 
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	var extraIdentityNumber = extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -364,9 +370,9 @@ function registerLongPollingEngine() {
 }
 
 function populateTitleDeeds() {
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
 
+	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
+	
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
 		request_url = TITLE_DEEDS_URL;
@@ -378,8 +384,7 @@ function populateTitleDeeds() {
 }
 function fetchLandOwnerName() {
 
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -394,8 +399,8 @@ function fetchLandOwnerName() {
 }
 
 function fetchTitleDeedOwnerName() {
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+
+	extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -457,7 +462,7 @@ function resetInputFields() {
 	document.getElementById('select_filter_titledeeds_proprietorship').value = "-1";
 }
 function addTestData() {
-	document.getElementById('id_input_land_owner_identity_number').value = "32361839";
+	document.getElementById('id_input_land_owner_identity_number').value = getCache(EXTRA_LAND_OWNER_ID);
 	document.getElementById('id_input_registered_proprietor').value = "32361839";
 	document.getElementById('id_input_entry_number').value = "001";
 	document.getElementById('textarea_consideration_and_remarks').value = "Considered and remarked";
