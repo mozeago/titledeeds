@@ -48,17 +48,17 @@
 
 		/**
 	* Inserts data into the table[title_deeds] in the order below
-	* array ('approximate_area','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number')
+	* array ('approximate_area','area_units','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number')
 	* is mappped into 
-	* array ($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number)
+	* array ($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number)
 	* @return 1 if data was inserted,0 otherwise
 	* if redundancy check is true, it inserts if the record if it never existed else.
 	* if the record exists, it returns the number of times the record exists on the relation
 	*/
-	public function insert($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number,$redundancy_check= false, $printSQL = false) {
-		$columns = array('approximate_area','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number');
-		$records = array($$approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number);
-		return $this->title_deeds->insert_prepared_records($$approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number,$redundancy_check,$printSQL );
+	public function insert($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number,$redundancy_check= false, $printSQL = false) {
+		$columns = array('approximate_area','area_units','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number');
+		$records = array($$approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number);
+		return $this->title_deeds->insert_prepared_records($$approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number,$redundancy_check,$printSQL );
 	}
 
 
@@ -109,6 +109,10 @@
 		$approximate_area = $title_deeds_row_items ['approximate_area'];
 	if ($approximate_area  != null) {
 	$html_export .= $this->parseHtmlExport ( 'approximate_area', $approximate_area  );
+}
+$area_units = $title_deeds_row_items ['area_units'];
+	if ($area_units  != null) {
+	$html_export .= $this->parseHtmlExport ( 'area_units', $area_units  );
 }
 $land_owner = $title_deeds_row_items ['land_owner'];
 	if ($land_owner  != null) {

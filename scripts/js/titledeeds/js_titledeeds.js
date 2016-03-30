@@ -52,6 +52,12 @@ function init() {
 	// populateTitleDeeds
 	registerLongPollingEngine();
 
+	if (getCache(EXTRA_LAND_OWNER_ID) == null || getCache(EXTRA_LAND_OWNER_ID) == 'null') {
+		var landowner_id = prompt("Enter land owner id number");
+		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
+	}
+	document.getElementById('input_landowner_idnumber').value = getCache(EXTRA_LAND_OWNER_ID);
+	fetchLandOwnerName();
 }
 
 /**
@@ -77,6 +83,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		resetInputFields();
 		setDefaultSaveType();
 		populateTitleDeeds();
+		window.location="titledeed_easements.html";
 		break;
 
 	case INTENT_QUERY_TITLE_DEEDS:

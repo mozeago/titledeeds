@@ -1,7 +1,7 @@
 <?php
 
 	/**
-	* THIS SOURCE CODE WAS AUTOMATICALLY GENERATED ON Wed 08:30:08  23/03/2016
+	* THIS SOURCE CODE WAS AUTOMATICALLY GENERATED ON Wed 03:50:31  30/03/2016
 	* 
 	*
 	* DATABASE CRUD GENERATOR IS AN OPEN SOURCE PROJECT. TO IMPROVE ON THIS PROJECT BY
@@ -91,6 +91,26 @@ class TitleDeeds {
 	*/
 	public function set_approximate_area($approximate_area) {
 		$this->_approximate_area = approximate_area;
+	}
+	
+	
+	/**
+	* private class variable area_units
+	*/
+	private $_area_units;
+	
+	/**
+	* returns the value of area_units
+	*/
+	public function _get_area_units() {
+		return $this->_area_units;
+	}
+	
+	/**
+	* sets the value of area_units
+	*/
+	public function set_area_units($area_units) {
+		$this->_area_units = area_units;
 	}
 	
 	
@@ -238,11 +258,11 @@ class TitleDeeds {
 		
 	/**
 	* Performs a database query and returns the value of id_title_deed 
-	* based on the value of $approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number passed to the function
+	* based on the value of $approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number passed to the function
 	*/
-	public function get_id_title_deed($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number) {
-		$columns = array ('approximate_area','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number');
-		$records = array ($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number);
+	public function get_id_title_deed($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number) {
+		$columns = array ('approximate_area','area_units','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number');
+		$records = array ($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number);
 		$id_title_deed_ = $this->query_from_title_deeds ( $columns, $records );
 		return count($id_title_deed_)>0 ? $id_title_deed_ [0] ['id_title_deed'] : null;
 	}
@@ -257,6 +277,18 @@ class TitleDeeds {
 		$records = array ($id_title_deed);
 		$approximate_area_ = $this->query_from_title_deeds ( $columns, $records );
 		return count($approximate_area_)>0 ? $approximate_area_ [0] ['approximate_area'] : null;
+	}
+	
+	
+	/**
+	* Performs a database query and returns the value of area_units 
+	* based on the value of $id_title_deed passed to the function
+	*/
+	public function get_area_units($id_title_deed) {
+		$columns = array ('id_title_deed');
+		$records = array ($id_title_deed);
+		$area_units_ = $this->query_from_title_deeds ( $columns, $records );
+		return count($area_units_)>0 ? $area_units_ [0] ['area_units'] : null;
 	}
 	
 	
@@ -347,16 +379,16 @@ class TitleDeeds {
 	
 	/**
 	* Inserts data into the table[title_deeds] in the order below
-	* array ('approximate_area','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number')
+	* array ('approximate_area','area_units','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number')
 	* is mappped into 
-	* array ($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number)
+	* array ($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number)
 	* @return 1 if data was inserted,0 otherwise
 	* if redundancy check is true, it inserts if the record if it never existed else.
 	* if the record exists, it returns the number of times the record exists on the relation
 	*/
-	public function insert_prepared_records($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number,$redundancy_check= false, $printSQL = false) {
-		$columns = array('approximate_area','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number');
-		$records = array($approximate_area,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number);
+	public function insert_prepared_records($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number,$redundancy_check= false, $printSQL = false) {
+		$columns = array('approximate_area','area_units','land_owner','edition','opened','registration_section','parcel_number','plot_number','registy_map_sheet_number');
+		$records = array($approximate_area,$area_units,$land_owner,$edition,$opened,$registration_section,$parcel_number,$plot_number,$registy_map_sheet_number);
 		return $this->insert_records_to_title_deeds ( $columns, $records,$redundancy_check, $printSQL );
 	}
 
