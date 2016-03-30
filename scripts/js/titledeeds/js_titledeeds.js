@@ -52,7 +52,8 @@ function init() {
 	// populateTitleDeeds
 	registerLongPollingEngine();
 
-	if (getCache(EXTRA_LAND_OWNER_ID) == null || getCache(EXTRA_LAND_OWNER_ID) == 'null') {
+	if (getCache(EXTRA_LAND_OWNER_ID) == null
+			|| getCache(EXTRA_LAND_OWNER_ID) == 'null') {
 		var landowner_id = prompt("Enter land owner id number");
 		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
 	}
@@ -83,7 +84,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		resetInputFields();
 		setDefaultSaveType();
 		populateTitleDeeds();
-		window.location="titledeed_easements.html";
+		window.location = "titledeed_easements.html";
 		break;
 
 	case INTENT_QUERY_TITLE_DEEDS:
@@ -168,7 +169,7 @@ function isValid(landowner_idnumber, land_approximate_area, select_ward,
 		errorLog += "Invalid id number\n";
 	}
 
-	if (land_approximate_area < 0 || !isNumbers(land_approximate_area)) {
+	if (land_approximate_area.length < 1 || !isNumbers(land_approximate_area)) {
 		formValid = false;
 		errorLog += "Invalid approximate area\n";
 	}
@@ -211,6 +212,7 @@ function saveTitleDeed() {
 	var landowner_idnumber = $('#input_landowner_idnumber').val();
 	var landowner_name = $('#input_landowner_name').val(); // MEMORY LEAK
 	var land_approximate_area = $('#input_land_approximate_area').val();
+	var land_area_units = $('#input_land_approximate_area_units').val();
 	var select_county = $('#input_select_county').val(); // MEMORY LEAK
 	var select_ward = $('#input_select_ward').val();
 	var title_deed_edition = $('#input_title_deed_edition').val();
@@ -226,8 +228,8 @@ function saveTitleDeed() {
 		var saveType = localStorage.getItem(TITLE_DEEDS_SAVE_TYPE);
 
 		var params = "landowner_idnumber=" + landowner_idnumber
-
-		+ "&land_approximate_area=" + land_approximate_area + "&select_ward="
+				+ "&land_approximate_area=" + land_approximate_area
+				+ "&land_area_units=" + land_area_units + "&select_ward="
 				+ select_ward + "&title_deed_edition=" + title_deed_edition
 				+ "&title_deed_opened=" + title_deed_opened
 				+ "&title_deed_parcel_number=" + title_deed_parcel_number
