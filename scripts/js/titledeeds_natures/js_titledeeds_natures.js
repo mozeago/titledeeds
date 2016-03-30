@@ -50,12 +50,18 @@ function init() {
 	addDropDownSelectListeners();
 
 	// add test data
-	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD---
-	addTestData();
+	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD--- addTestData();
 
 	// register long polling engine
 	registerLongPollingEngine();
 
+	if (getCache(EXTRA_LAND_OWNER_ID) == null) {
+		var landowner_id = prompt("Enter land owner id number");
+		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
+	}
+	
+	fetchLandOwnerName();
+	populateTitleDeeds();
 }
 
 /**
@@ -81,6 +87,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		resetInputFields();
 		setDefaultSaveType();
 		populateTitleDeedNatures();
+		window.location="titledeeds_proprietorship.html";
 		break;
 
 	case INTENT_QUERY_TITLE_DEEDS_NATURE:
@@ -160,11 +167,11 @@ function saveTitleDeedNatures() {
 	var titledeedEasement = $('#textarea_title_deed_nature').val();
 
 	if (titleDeedId == "-1" || titleDeedId == null) {
-		alertError("Cannot save title deed nature..Select title deed");
+		alert("Cannot save title deed nature..Select title deed");
 		return;
 	}
 	if (titledeedEasement.length < 5 || isNumbers(titledeedEasement)) {
-		alertError("Cannot save title deed nature..Enter title deed nature");
+		alert("Cannot save title deed nature..Enter title deed nature");
 		return;
 	}
 	var saveType = localStorage.getItem(TITLE_DEEDS_SAVE_TYPE);
@@ -214,8 +221,8 @@ function setSelectedTitleDeedNATURE(extraTitleDeed) {
  */
 function populateTitleDeedNatures() {
 
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	var extraIdentityNumber = extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
+	
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -267,9 +274,8 @@ function registerLongPollingEngine() {
 }
 
 function populateTitleDeeds() {
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
-
+	extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
+	
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
 		request_url = TITLE_DEEDS_URL;
@@ -281,8 +287,8 @@ function populateTitleDeeds() {
 }
 function fetchLandOwnerName() {
 
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
+	
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -297,8 +303,9 @@ function fetchLandOwnerName() {
 }
 
 function fetchTitleDeedOwnerName() {
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	
+	extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
+	
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
