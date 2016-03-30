@@ -321,3 +321,13 @@ function isKenyanIdNumber(input) {
 function isKenyanPassport(input) {
 	return validate(/^[0-9]{10}$/, input);
 }
+
+/**
+ * Checks whether the input is a post address
+ * 
+ * @param input
+ * @returns
+ */
+function isPostalAddress(input) {
+	return validate(/^[0-9]+\s-\s[0-9]{5}\s[A-Za-z]+$/, input);
+}

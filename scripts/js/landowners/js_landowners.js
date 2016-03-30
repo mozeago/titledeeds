@@ -147,7 +147,7 @@ function isValidForm(firstname, lastname, middlename, idnumber, passport,
 		formValid = false;
 		errorLog += "Invalid date of birth\n";
 	}
-	if (!isAlphaNumeric(address)) {
+	if (!isPostalAddress(address)) {
 		formValid = false;
 		errorLog += "Invalid address\n";
 	}
