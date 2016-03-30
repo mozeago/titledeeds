@@ -35,3 +35,6 @@ EXTRA_LAND_OWNER = "extra_land_owner";
 NOTIFICATION_ID = "notification_id";
 
 INTENT_INJECT_PAGE_NAVIGATION = "intent_inject_page_navigation";
+
+EXTRA_LAND_OWNER_ID = "extra_land_owner_idnumber";
+
