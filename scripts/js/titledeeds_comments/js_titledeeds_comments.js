@@ -50,12 +50,18 @@ function init() {
 	addDropDownSelectListeners();
 
 	// add test data
-	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD---
-	addTestData();
+	// ---NO-LONGER--NEEDED--IN--PRODUCTION BUILD---addTestData();
 
 	// register long polling engine
 	registerLongPollingEngine();
 
+	if (getCache(EXTRA_LAND_OWNER_ID) == null) {
+		var landowner_id = prompt("Enter land owner id number");
+		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
+	}
+	
+	fetchLandOwnerName();
+	populateTitleDeeds();
 }
 
 /**
@@ -267,8 +273,7 @@ function registerLongPollingEngine() {
 }
 
 function populateTitleDeeds() {
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -281,8 +286,7 @@ function populateTitleDeeds() {
 }
 function fetchLandOwnerName() {
 
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
@@ -297,8 +301,7 @@ function fetchLandOwnerName() {
 }
 
 function fetchTitleDeedOwnerName() {
-	var extraIdentityNumber = document
-			.getElementById('id_input_land_owner_identity_number').value;
+	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
 	if (extraIdentityNumber.length == 7 || extraIdentityNumber.length == 8
 			|| extraIdentityNumber.length == 10) {
