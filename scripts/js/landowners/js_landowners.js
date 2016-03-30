@@ -73,6 +73,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		document.getElementById('input_landowner_address').value = "";
 		setDefaultSaveType();
 		populateLandOwners();
+		window.location = "titledeeds.html";
 		break;
 
 	case INTENT_QUERY_LAND_OWNERS:
@@ -134,7 +135,7 @@ function isValidForm(firstname, lastname, middlename, idnumber, passport,
 		formValid = false;
 		errorLog += "Invalid middlename\n";
 	}
-	if (!isKenyanIdNumber (idnumber)) {
+	if (!isKenyanIdNumber(idnumber)) {
 		formValid = false;
 		errorLog += "Invalid id number\n";
 	}
@@ -180,6 +181,9 @@ function saveLandOwner() {
 
 	if (isValidForm(firstname, lastname, middlename, idnumber, passport,
 			dateOfBirth, address)) {
+
+		setCache(EXTRA_LAND_OWNER_ID, idnumber);
+
 		switch (saveType) {
 		case SAVE_TYPE_UPDATE:
 			params += "&" + ACTION_TYPE + "=" + ACTION_UPDATE + "&"
