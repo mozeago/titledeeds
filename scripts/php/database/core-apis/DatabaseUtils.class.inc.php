@@ -414,11 +414,11 @@ class DatabaseUtils {
 			if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
 				
 				if ($extraSQL != "") {
-					$query .= " WHERE " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			} else {
 				if ($extraSQL != "") {
-					$query .= " AND " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			}
 			
@@ -521,11 +521,11 @@ class DatabaseUtils {
 			if ((count ( $columns ) == 0) && (count ( $records ) == 0)) {
 				
 				if ($extraSQL != "") {
-					$query .= " WHERE " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			} else {
 				if ($extraSQL != "") {
-					$query .= " AND " . $extraSQL . ";";
+					$query .= $extraSQL . ";";
 				}
 			}
 				

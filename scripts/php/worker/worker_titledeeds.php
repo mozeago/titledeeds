@@ -58,6 +58,7 @@ function processHTTPRequest($action, $client, $intent) {
 }
 function insertTitleDeed($action, $client) {
 	$approximate_area = $_POST ['land_approximate_area'];
+	$land_area_units = $_POST ['land_area_units'];
 	$land_owner = getLandOwnerId ( $action, $client, $_POST ['landowner_idnumber'] );
 	$edition = $_POST ['title_deed_edition'];
 	$opened = $_POST ['title_deed_opened'];
@@ -67,7 +68,7 @@ function insertTitleDeed($action, $client) {
 	$registy_map_sheet_number = $_POST ['title_deed_map_sheet_number'];
 	
 	$titledeeds = new TitleDeeds ( $action, $client );
-	$titledeeds->insert_prepared_records ( $approximate_area, $land_owner, $edition, $opened, $registration_section, $parcel_number, $plot_number, $registy_map_sheet_number, true, true );
+	$titledeeds->insert_prepared_records ( $approximate_area, $land_area_units, $land_owner, $edition, $opened, $registration_section, $parcel_number, $plot_number, $registy_map_sheet_number, true, false );
 }
 function queryTitleDeeds($action, $client) {
 	$title_deed = new TitleDeeds ( $action, $client );
@@ -132,8 +133,7 @@ function queryTitleDeeds($action, $client) {
 				if ($title_deed_info ["trashed"] == 1 || $title_deed_info ["deleted"] == 1) {
 					continue;
 				}
-				$title_deedHTML .= '<option value="' . $title_deed_info ['id_land_owner'] . '" >' 
-						. $title_deed_info ['land_owner_name'] . '</option>';
+				$title_deedHTML .= '<option value="' . $title_deed_info ['id_land_owner'] . '" >' . $title_deed_info ['land_owner_name'] . '</option>';
 				$count ++;
 			}
 		}
@@ -171,6 +171,7 @@ function updateTitleDeedNames($action, $client) {
 	
 	$approximate_area = $_POST ['land_approximate_area'];
 	$land_owner = getLandOwnerId ( $action, $client, $_POST ['landowner_idnumber'] );
+	$land_area_units = $_POST ['land_area_units'];
 	$edition = $_POST ['title_deed_edition'];
 	$opened = $_POST ['title_deed_opened'];
 	$registration_section = $_POST ['select_ward'];
@@ -180,6 +181,7 @@ function updateTitleDeedNames($action, $client) {
 	
 	$columns = array (
 			'approximate_area',
+			'area_units',
 			'land_owner',
 			'edition',
 			'opened',
@@ -190,6 +192,7 @@ function updateTitleDeedNames($action, $client) {
 	);
 	$records = array (
 			$approximate_area,
+			$land_area_units,
 			$land_owner,
 			$edition,
 			$opened,
@@ -308,7 +311,7 @@ function prepareLandOwnerTitleDeeds($action, $client) {
 		
 		$county_name = (new County ( $action, $client ))->get_county_name ( $id_county );
 		
-		$title_deeds_html .= '<option value="' . $id_titledeed . '">' . $ward_name . '/' . $county_name . ' Plot no. ' . $plot_number .' Parcel no. ' . $parcel_number .' Map Sheet no. ' . $registy_map_sheet_number . '</option>';
+		$title_deeds_html .= '<option value="' . $id_titledeed . '">' . $ward_name . '/' . $county_name . ' Plot no. ' . $plot_number . ' Parcel no. ' . $parcel_number . ' Map Sheet no. ' . $registy_map_sheet_number . '</option>';
 	}
 	
 	echo $title_deeds_html;

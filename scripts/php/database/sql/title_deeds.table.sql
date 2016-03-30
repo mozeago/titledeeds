@@ -1,7 +1,7 @@
 CREATE TABLE `title_deeds` (
   `id_title_deed` int(11) NOT NULL AUTO_INCREMENT,
   `approximate_area` decimal(65,0) NOT NULL,
-  `area_units` float NOT NULL,
+  `area_units` varchar(128) NOT NULL,
   `land_owner` int(11) NOT NULL,
   `edition` int(11) NOT NULL,
   `opened` date NOT NULL,

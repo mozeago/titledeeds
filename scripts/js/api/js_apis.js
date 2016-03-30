@@ -1,6 +1,6 @@
 /**
  * This script contains all the various API's used in the whole project Created
- * by victor on 2/17/2016.
+ * by Rommy on 2/17/2016.
  */
 
 /**
