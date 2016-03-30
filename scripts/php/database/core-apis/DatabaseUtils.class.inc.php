@@ -418,7 +418,7 @@ class DatabaseUtils {
 				}
 			} else {
 				if ($extraSQL != "") {
-					$query .= $extraSQL . ";";
+					$query .= " AND " . $extraSQL . ";";
 				}
 			}
 			
@@ -525,7 +525,7 @@ class DatabaseUtils {
 				}
 			} else {
 				if ($extraSQL != "") {
-					$query .= $extraSQL . ";";
+					$query .= " AND " . $extraSQL . ";";
 				}
 			}
 				

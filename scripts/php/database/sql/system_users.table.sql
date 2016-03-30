@@ -8,4 +8,4 @@ CREATE TABLE `system_users` (
   `password` varchar(128) NOT NULL,
   `account_status` int(11) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id_system_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1

@@ -7,4 +7,4 @@ CREATE TABLE `title_deed_proprietorship` (
   `consideration_and_remarks` text NOT NULL,
   `signature_of_register` int(11) NOT NULL,
   PRIMARY KEY (`id_title_deed_proprietorship`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1
