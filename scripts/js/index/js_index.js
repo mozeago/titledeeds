@@ -10,7 +10,10 @@ function welcome() {
 	params = ACTION_TYPE + "=" + ACTION_TYPE;
 	sendPOSTHttpRequest(WORKER_SCRIPT_URL, params,
 			INTENT_INJECT_PAGE_NAVIGATION);
+	
+	removeCache(EXTRA_LAND_OWNER_ID);
 }
+
 
 /**
  * Callback called when an http request is successful

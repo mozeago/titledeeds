@@ -72,6 +72,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 		document.getElementById('input_county_headquarters').value = "";
 		setDefaultSaveType();
 		populateCounties();
+		window.location="wards.html";
 		break;
 	case INTENT_TRASH_COUNTY:
 	case INTENT_ERASE_COUNTY:
