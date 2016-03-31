@@ -45,7 +45,7 @@
 		<div id="page_navigation"></div>
 		<div id="page-wrapper">
 			<div class="row" style="padding: 10px;">
-				<div class="col-lg-4">
+				<div class="col-lg-6">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<label id="label_title_deeds"> Title Deeds</label>
@@ -53,7 +53,7 @@
 						<div class="panel-body">
 							<div class="form-group">
 								<select id="input_select_title_deed" class="form-control">
-									<option>Select Title Deed</option>
+									<option value="-1">Select Title Deed</option>
 								</select>
 							</div>
 						</div>
@@ -61,7 +61,7 @@
 
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<label id="label_county_headquaters">New Land Owner</label>
+							<label id="label_county_new_land_owner">New Land Owner</label>
 						</div>
 						<div class="panel-body">
 							<div class="form-group">
@@ -70,17 +70,47 @@
 							</div>
 							<div class="form-group">
 								<input placeholder="Land Owner Name" class="form-control"
-									id="input_new_land_owner_name" />
+									disabled="disabled" id="input_new_land_owner_name" />
 							</div>
 						</div>
 
 
 					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<label id="label_land_transfer_info">Land Transfer info</label>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label>Land Transfer Type</label> <select class="form-control"
+									id="input_select_land_transfer_type">
+									<option value="Full land Transfer">Full land transfer</option>
+									<option value="Land Partition">Land Partition</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<input placeholder="Approximate Area" class="form-control"
+									id="input_approximate_area" />
+							</div>
+							<div class="form-group">
 
-					<div>
-						<button id="button_transfer_land"
-							class="btn btn-primary btn-block ">Transfer Land</button>
+
+								<label>Units</label> <select class="form-control"
+									id="input_land_approximate_area_units">
+									<option value="Acres">Acres</option>
+									<option value="Ha">Hectares</option>
+									<option value="flats">Flats per block</option>
+								</select>
+							</div>
+						</div>
 					</div>
+
+				</div>
+				<div>
+					<button id="button_transfer_land"
+						class="btn btn-primary btn-block ">Transfer Land</button>
 				</div>
 			</div>
 		</div>
@@ -92,7 +122,8 @@
 	<script src="scripts/js/xhr_scripts_urls/js_xhr_scripts_urls.js"
 		type="text/javascript"></script>
 	<script src="scripts/js/api/js_apis.js" type="text/javascript"></script>
-	<script src="scripts/js/transactions/js_transactions.js" type="text/javascript"></script>
+	<script src="scripts/js/transactions/js_transactions.js"
+		type="text/javascript"></script>
 </body>
 
 </html>

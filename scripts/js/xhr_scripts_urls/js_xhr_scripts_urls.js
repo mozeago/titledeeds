@@ -71,6 +71,11 @@ var TITLE_DEEDS_PROPRIETORSHIP_URL = WORKER_SCRIPTS_DIR
 var SYSTEM_USERS_URL = WORKER_SCRIPTS_DIR + "worker_system_users.php";
 
 /**
- * URL for the title deed nature worker script file
+ * URL for the title deed authentication worker script file
  */
 var AUTHENTICATE_URL = WORKER_SCRIPTS_DIR + "worker_authenticator.php";
+/**
+ * URL for the title deed transactions worker script file
+ */
+var TITLE_DEED_TRANSACTIONS_URL = WORKER_SCRIPTS_DIR
+		+ "worker_transactions.php";

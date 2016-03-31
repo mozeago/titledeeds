@@ -61,7 +61,6 @@ function init() {
 	}
 	
 	fetchLandOwnerName();
-	populateTitleDeeds();
 }
 
 /**
