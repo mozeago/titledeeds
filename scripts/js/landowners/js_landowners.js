@@ -146,6 +146,12 @@ function isValidForm(firstname, lastname, middlename, idnumber, passport,
 	if (dateOfBirth.length == 0) {
 		formValid = false;
 		errorLog += "Invalid date of birth\n";
+	}else{
+		var datePieces = dateOfBirth.split("-");
+		if( (2016 - datePieces[0]) < 18 ){
+			formValid = false;
+			errorLog += "Invalid date - underage\n";
+		}
 	}
 	if (!isPostalAddress(address)) {
 		formValid = false;

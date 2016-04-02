@@ -194,9 +194,9 @@ class TitleDeedComments {
 	* if redundancy check is true, it inserts if the record if it never existed else.
 	* if the record exists, it returns the number of times the record exists on the relation
 	*/
-	public function insert_prepared_records($id_title_deed,$title_deed_comments,$posted_date,$redundancy_check= false, $printSQL = false) {
-		$columns = array('id_title_deed','title_deed_comments','posted_date');
-		$records = array($id_title_deed,$title_deed_comments,$posted_date);
+	public function insert_prepared_records($id_title_deed,$title_deed_comments, $charged,$posted_date,$redundancy_check= false, $printSQL = false) {
+		$columns = array('id_title_deed','title_deed_comments','charge_type','posted_date');
+		$records = array($id_title_deed,$title_deed_comments,$charged,$posted_date);
 		return $this->insert_records_to_title_deed_comments ( $columns, $records,$redundancy_check, $printSQL );
 	}
 

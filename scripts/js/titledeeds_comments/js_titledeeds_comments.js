@@ -55,11 +55,12 @@ function init() {
 	// register long polling engine
 	registerLongPollingEngine();
 
-	if (getCache(EXTRA_LAND_OWNER_ID) == null) {
+	if (getCache(EXTRA_LAND_OWNER_ID) == null
+			|| getCache(EXTRA_LAND_OWNER_ID) == 'null') {
 		var landowner_id = prompt("Enter land owner id number");
 		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
 	}
-	
+
 	fetchLandOwnerName();
 	populateTitleDeeds();
 }
@@ -86,7 +87,7 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 	case INTENT_UPDATE_TITLE_DEED_COMMENTS:
 		resetInputFields();
 		setDefaultSaveType();
-		populateTitleDeedComments();
+		//populateTitleDeedComments();
 		break;
 
 	case INTENT_QUERY_TITLE_DEEDS_COMMENTS:
@@ -165,19 +166,24 @@ function saveTitleDeedcomments() {
 
 	var titleDeedId = $('#select_landowner_titledeeds').val();
 	var titledeedComment = $('#textarea_title_deed_comment').val();
-
+	var charged = $('#select_titledeed_charges').val();
+	
 	if (titleDeedId == "-1" || titleDeedId == null) {
-		alertError("Cannot save title deed comment..Select title deed");
+		alert("Cannot save title deed comment..Select title deed");
 		return;
 	}
 	if (titledeedComment.length < 5 || isNumbers(titledeedComment)) {
-		alertError("Cannot save title deed comment..Enter title deed comment");
+		alert("Cannot save title deed comment..Enter title deed comment");
+		return;
+	}
+	if (charged == "-1") {
+		alert("Cannot save title deed comment..Select title deed charge type");
 		return;
 	}
 	var saveType = localStorage.getItem(TITLE_DEEDS_SAVE_TYPE);
 
 	var params = "titledeed_id=" + titleDeedId + "&titledeed_comment="
-			+ titledeedComment;
+			+ titledeedComment+"&charged="+charged;
 
 	switch (saveType) {
 	case SAVE_TYPE_UPDATE:

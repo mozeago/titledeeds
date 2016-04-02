@@ -57,6 +57,7 @@ function init() {
 		var landowner_id = prompt("Enter land owner id number");
 		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
 	}
+	
 	document.getElementById('input_landowner_idnumber').value = getCache(EXTRA_LAND_OWNER_ID);
 	fetchLandOwnerName();
 }

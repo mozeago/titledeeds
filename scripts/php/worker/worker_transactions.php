@@ -57,7 +57,7 @@ function startLandTransfer($action, $client) {
 	
 	$new_land_owner_infos = $land_owners->query_from_land_owners ( array (
 			'idnumber' 
-	), $newlandowner );
+	), array($newlandowner ));
 	$new_land_owner_user_id = $new_land_owner_infos [0] ['id_land_owner'];
 	
 	if ($transferType == "Full land Transfer") {

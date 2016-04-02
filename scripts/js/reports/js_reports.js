@@ -18,7 +18,7 @@ INTENT_QUERY_TITLE_DEED_OWNER_NAME = "query_titledeed_owner";
 
 INTENT_QUERY_LAND_OWNER_TITLE_DEEDS = "query_land_owner_title_deeds";
 
-INTENT_EXECUTE_TITLE_DEED_TRANSACTION = "intent_execute_title_deed_transaction";
+INTENT_PRINT_TITLE_DEED = "intent_print_title_deed";
 
 // Event listener for onpage loaded
 addEventListener("load", init, false);
@@ -45,7 +45,7 @@ function init() {
 	// add test data addTestData();
 
 	if (getCache(EXTRA_LAND_OWNER_ID) == null
-			|| getCache(EXTRA_LAND_OWNER_ID) == 'null') {
+			| getCache(EXTRA_LAND_OWNER_ID) == "null") {
 		var landowner_id = prompt("Enter land owner id number");
 		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
 	}
@@ -72,12 +72,10 @@ function onSuccessfulXHR(request_intent, xhr, response) {
 	case INTENT_INJECT_PAGE_NAVIGATION:
 		document.getElementById("page_navigation").innerHTML = response;
 		break;
-	case INTENT_EXECUTE_TITLE_DEED_TRANSACTION:
-		populateTitleDeeds();
+	case INTENT_PRINT_TITLE_DEED:
 		resetInputFields();
 		setDefaultSaveType();
-		// window.location = "titledeeds_report.html";
-		alert(response);
+		window.location = "print_titledeed.php";
 		break;
 	case INTENT_GET_LAND_OWNER_JSON_OBJECT:
 		setLandOwnerProfile(response);
@@ -113,8 +111,8 @@ function setDefaultSaveType() {
 
 // add button click listeners
 function addButtonsClickListeners() {
-	$('#button_transfer_land').click(function(e) {
-		createTitleDeed();
+	$('#button_create_title_deed').click(function(e) {
+		createTitleDeedReport();
 	});
 }
 
@@ -123,19 +121,19 @@ function addTextChangeWatcher() {
 		fetchNewLandOwnerName();
 	});
 }
-/**
- * Transfer land
- */
-function createTitleDeed() {
-	var selected_title_deed = $("#input_select_title_deed").val();
-	alert(selected_title_deed);
-}
 
-function isValid(approximateArea, newLandOwner, titleDeed) {
-	if (!isKenyanIdNumber(newLandOwner)) {
-		formValid = false;
-		errorLog += "Invalid id number\n";
+function createTitleDeedReport() {
+	var selected_title_deed = $("#input_select_title_deed").val();
+	if (selected_title_deed == "-1") {
+		alert("Invalid Title Deed");
+		return;
 	}
+
+	request_url = PRINT_REPORTS_URL;
+	request_params = ACTION_TYPE + "=" + ACTION_QUERY + "&title_deed="
+			+ selected_title_deed;
+	request_intent = INTENT_PRINT_TITLE_DEED;
+	sendPOSTHttpRequest(request_url, request_params, request_intent);
 }
 function populateTitleDeeds() {
 	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
@@ -202,17 +200,7 @@ function setLandOwnerProfile(response) {
 }
 
 function resetInputFields() {
-	document.getElementById('input_new_land_owner_id').value = "";
-	document.getElementById('input_approximate_area').value = "-1";
-}
-function addTestData() {
-	// document.getElementById('input_select_title_deed').value = "";
-	document.getElementById('input_new_land_owner_id').value = "11223344";
-	// document.getElementById('input_new_land_owner_name').value = "";
-	// document.getElementById('input_select_land_transfer_type').value = "";
-	document.getElementById('input_approximate_area').value = "200";
-	// document.getElementById('input_land_approximate_area_units').value = "";
-
+	
 }
 
 function alertError(error) {

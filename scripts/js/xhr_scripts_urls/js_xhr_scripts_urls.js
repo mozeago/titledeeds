@@ -79,3 +79,8 @@ var AUTHENTICATE_URL = WORKER_SCRIPTS_DIR + "worker_authenticator.php";
  */
 var TITLE_DEED_TRANSACTIONS_URL = WORKER_SCRIPTS_DIR
 		+ "worker_transactions.php";
+/**
+ * URL for the title deed transactions worker script file
+ */
+var PRINT_REPORTS_URL = WORKER_SCRIPTS_DIR
+		+ "worker_reports.php";

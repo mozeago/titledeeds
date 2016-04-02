@@ -55,7 +55,8 @@ function init() {
 	// register long polling engine
 	registerLongPollingEngine();
 
-	if (getCache(EXTRA_LAND_OWNER_ID) == null) {
+	if (getCache(EXTRA_LAND_OWNER_ID) == null
+			|| getCache(EXTRA_LAND_OWNER_ID) == 'null') {
 		var landowner_id = prompt("Enter land owner id number");
 		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
 	}

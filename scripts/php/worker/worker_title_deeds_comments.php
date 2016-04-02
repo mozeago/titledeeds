@@ -53,8 +53,9 @@ function processHTTPRequest($action, $client, $intent) {
 function insertTitleDeedComments($action, $client) {
 	$id_title_deed = $_POST ['titledeed_id'];
 	$title_deed_comments = $_POST ['titledeed_comment'];
+	$charged = $_POST['charged'];
 	$posted_date = date ( "Y-m-d h:i:s" );
-	return (new TitleDeedComments ( $action, $client ))->insert_prepared_records ( $id_title_deed, $title_deed_comments, $posted_date, true, false );
+	return (new TitleDeedComments ( $action, $client ))->insert_prepared_records ( $id_title_deed, $title_deed_comments, $charged,$posted_date, true, true );
 }
 function queryTitleDeedComments($action, $client) {
 	include $_SERVER ['DOCUMENT_ROOT'] . '/titledeeds/scripts/php/database/crud/County.class.php';
