@@ -42,10 +42,10 @@ function init() {
 	// add button click listeners
 	addButtonsClickListeners();
 
-	// add test data addTestData();
+	// add test data
+	addTestData();
 
-	if (getCache(EXTRA_LAND_OWNER_ID) == null
-			|| getCache(EXTRA_LAND_OWNER_ID) == 'null') {
+	if (getCache(EXTRA_LAND_OWNER_ID) == null) {
 		var landowner_id = prompt("Enter land owner id number");
 		setCache(EXTRA_LAND_OWNER_ID, landowner_id);
 	}
@@ -114,7 +114,7 @@ function setDefaultSaveType() {
 // add button click listeners
 function addButtonsClickListeners() {
 	$('#button_transfer_land').click(function(e) {
-		createTitleDeed();
+		startLandTransaction();
 	});
 }
 
@@ -126,17 +126,28 @@ function addTextChangeWatcher() {
 /**
  * Transfer land
  */
-function createTitleDeed() {
-	var selected_title_deed = $("#input_select_title_deed").val();
-	alert(selected_title_deed);
+function startLandTransaction() {
+	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
+
+	var newLandOwner = document.getElementById('input_new_land_owner_id').value;
+	var transferType = document
+			.getElementById('input_select_land_transfer_type').value;
+	var titleDeed = document.getElementById('input_select_title_deed').value;
+	var approximateArea = document.getElementById('input_approximate_area').value;
+	var areaUnits = document
+			.getElementById('input_land_approximate_area_units').value;
+
+	params = "new_land_owner=" + newLandOwner + "&transferType=" + transferType
+			+ "&titledeed=" + titleDeed + "&approximate_area="
+			+ "&old_land_owner=" + extraIdentityNumber + approximateArea
+			+ "&areaUnits=" + areaUnits + "&" + ACTION_TYPE + "="
+			+ ACTION_INSERT;
+
+	sendPOSTHttpRequest(TITLE_DEED_TRANSACTIONS_URL, params,
+			INTENT_EXECUTE_TITLE_DEED_TRANSACTION);
+
 }
 
-function isValid(approximateArea, newLandOwner, titleDeed) {
-	if (!isKenyanIdNumber(newLandOwner)) {
-		formValid = false;
-		errorLog += "Invalid id number\n";
-	}
-}
 function populateTitleDeeds() {
 	var extraIdentityNumber = getCache(EXTRA_LAND_OWNER_ID);
 
